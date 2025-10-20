@@ -6,6 +6,9 @@
 
 ### Компіляція
 ```bash
+# Перейти в кореневу директорію проєкту
+cd /workspaces/pr2_op
+
 # Перейти в директорію з вихідним кодом
 cd src/main/java
 
@@ -15,8 +18,8 @@ javac *.java
 
 ### Запуск
 ```bash
-# Перейти в директорію з скомпільованими файлами
-cd src/main/java
+# Перейти в директорію з вихідним кодом (якщо ви ще не там)
+cd /workspaces/pr2_op/src/main/java
 
 # Запустити головний клас Restaurant
 java Restaurant
@@ -25,13 +28,15 @@ java Restaurant
 ## Структура проєкту
 
 - `src/main/java/` - директорія з вихідним кодом
+  - `ServiceParticipant.java` - абстрактний клас учасника обслуговування
+  - `Booking.java` - інтерфейс для операцій з бронюванням
   - `Customer.java` - клас відвідувача
   - `Waiter.java` - клас офіціанта
   - `Chef.java` - клас шеф-кухаря
   - `Order.java` - клас замовлення
-  - `OrderState.java` - перелік станів замовлення
-  - `PaymentProcessor.java` - інтерфейс для обробки оплати
-  - `User.java` - абстрактний клас користувача
+  - `OrderItem.java` - клас позиції замовлення
+  - `Table.java` - клас столика
+  - `PaymentService.java` - клас сервісу оплати
   - `Restaurant.java` - головний клас з демонстрацією
 
 ## UML-діаграми
