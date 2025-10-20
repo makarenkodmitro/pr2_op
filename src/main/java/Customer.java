@@ -1,23 +1,33 @@
 // Клас відвідувача ресторану
-public class Customer extends User implements PaymentProcessor {
-    private int tableNumber;
+public class Customer extends ServiceParticipant implements Booking {
+    private Table table;
 
-    public Customer(String name, int tableNumber) {
-        super(name, "Customer");
-        this.tableNumber = tableNumber;
+    public Customer(String name) {
+        super(name);
     }
 
     public void scanMenu() {
         System.out.println("Відвідувач " + name + " сканує QR-код меню");
     }
 
+    @Override
     public void makeOrder() {
         System.out.println("Відвідувач " + name + " робить замовлення");
     }
 
     @Override
-    public void processPayment(double amount) {
-        System.out.println("Відвідувач " + name + " оплачує " + amount + " грн безконтактно");
+    public void confirmOrder() {
+        // Не використовується відвідувачем
+    }
+
+    @Override
+    public void markReady() {
+        // Не використовується відвідувачем
+    }
+
+    public void pay(PaymentService paymentService) {
+        System.out.println("Відвідувач " + name + " оплачує замовлення");
+        paymentService.processPayment();
     }
 
     public void rateService(int rating) {
@@ -26,6 +36,10 @@ public class Customer extends User implements PaymentProcessor {
 
     @Override
     public void displayInfo() {
-        System.out.println("Відвідувач: " + name + ", Столик: " + tableNumber);
+        System.out.println("Відвідувач: " + name);
+    }
+
+    public void setTable(Table table) {
+        this.table = table;
     }
 }

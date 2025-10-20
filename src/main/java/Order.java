@@ -1,41 +1,34 @@
-// Клас замовлення
+// Клас для замовлення
 public class Order {
     private static int nextId = 1;
     private final int id;
-    private OrderState state;
-    private final Customer customer;
-    private double amount;
+    private String status;
+    private final OrderItem[] items;
+    private int itemCount;
 
-    public Order(Customer customer, double amount) {
+    public Order() {
         this.id = nextId++;
-        this.customer = customer;
-        this.amount = amount;
-        this.state = OrderState.CREATED;
+        this.status = "Створене";
+        this.items = new OrderItem[10];
+        this.itemCount = 0;
     }
 
-    public void setState(OrderState state) {
-        this.state = state;
-        System.out.println("Замовлення #" + id + " змінило стан на: " + state);
-    }
-
-    public void confirmPayment() {
-        if (state == OrderState.READY) {
-            customer.processPayment(amount);
-            setState(OrderState.PAID);
+    public void addItem(String dish, int quantity) {
+        if (itemCount < items.length) {
+            items[itemCount++] = new OrderItem(dish, quantity);
+            System.out.println("Додано до замовлення: " + dish + " x" + quantity);
         }
     }
 
-    public void complete() {
-        if (state == OrderState.PAID) {
-            setState(OrderState.COMPLETED);
+    public void changeStatus(String status) {
+        this.status = status;
+        System.out.println("Замовлення #" + id + " змінило статус на: " + status);
+    }
+
+    public void displayOrder() {
+        System.out.println("Замовлення #" + id + " (" + status + "):");
+        for (int i = 0; i < itemCount; i++) {
+            items[i].displayItem();
         }
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public OrderState getState() {
-        return state;
     }
 }

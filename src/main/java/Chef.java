@@ -1,15 +1,25 @@
 // Клас шеф-кухаря
-public class Chef extends User {
+public class Chef extends ServiceParticipant implements Booking {
     private String specialization;
 
     public Chef(String name, String specialization) {
-        super(name, "Chef");
+        super(name);
         this.specialization = specialization;
     }
 
-    public void markOrderReady(Order order) {
+    @Override
+    public void makeOrder() {
+        // Не використовується шеф-кухарем
+    }
+
+    @Override
+    public void confirmOrder() {
+        // Не використовується шеф-кухарем
+    }
+
+    @Override
+    public void markReady() {
         System.out.println("Шеф-кухар " + name + " позначає замовлення як готове");
-        order.setState(OrderState.READY);
     }
 
     @Override
